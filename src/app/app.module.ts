@@ -1,3 +1,4 @@
+import { MaterialLibModule } from './../../projects/material-lib/src/lib/material-lib.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -6,11 +7,12 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MaterialLibModule
   ],
   providers: [],
   bootstrap: [AppComponent]

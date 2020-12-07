@@ -1,0 +1,27 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "comment-format":false,
+    "member-ordering":false,
+    "no-host-metadata-property": false,
+    "unified-signatures": false,
+    "max-line-length": false,
+    "variable-name": false,
+    "no-conflicting-lifecycle": false,
+    "align": false,
+    "directive-class-suffix": false,
+    "ban-types": false,
+    "directive-selector": [
+      false,
+      "attribute",
+      "lib",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "lib",
+      "kebab-case"
+    ]
+  }
+}
