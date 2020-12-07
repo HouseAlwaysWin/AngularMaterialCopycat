@@ -3,9 +3,8 @@
 import { NgModule } from '@angular/core';
 import { MaterialLibComponent } from './material-lib.component';
 import { MatInput } from './input/input';
-import { MatInputModule } from './input/input.module';
-import { MatFormFieldModule } from './form-field';
-import { MatFormField } from './form-field/form-field';
+import { MatInputModule } from './input/input-module';
+import { MatFormField, MatLabel, MatFormFieldModule } from './form-field';
 
 
 @NgModule({
@@ -17,7 +16,8 @@ import { MatFormField } from './form-field/form-field';
   exports: [
     MaterialLibComponent,
     MatInput,
-    MatFormField
+    MatFormField,
+    MatLabel
   ]
 })
 export class MaterialLibModule { }
