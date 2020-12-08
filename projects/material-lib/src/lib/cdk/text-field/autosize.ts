@@ -33,6 +33,7 @@ import { DOCUMENT } from '@angular/common';
 @Directive({
     selector: 'textarea[cdkTextareaAutosize]',
     exportAs: 'cdkTextareaAutosize',
+    // tslint:disable-next-line: no-host-metadata-property
     host: {
         'class': 'cdk-textarea-autosize',
         // Textarea elements that have the directive applied should have a single row by default.

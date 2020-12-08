@@ -11,7 +11,7 @@
 export * from './common-behaviors/index';
 // export * from './datetime/index';
 export * from './error/error-options';
-// export * from './line/line';
+export * from './line/line';
 // export * from './option/index';
-// export * from './ripple/index';
-// export * from './selection/index';
+export * from './ripple/index';
+export * from './selection/index';
