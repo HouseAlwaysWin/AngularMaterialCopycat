@@ -5,7 +5,7 @@ import { MatInput } from './input/input';
 import { MatInputModule } from './input/input-module';
 import { MatFormField, MatLabel, MatFormFieldModule } from './form-field';
 import { MatListModule } from './list/list-module';
-import { MatList, MatListItem } from './list';
+import { MatList, MatListItem, MatListOption, MatSelectionList } from './list';
 
 
 @NgModule({
@@ -20,7 +20,9 @@ import { MatList, MatListItem } from './list';
     MatFormField,
     MatLabel,
     MatList,
-    MatListItem
+    MatListItem,
+    MatListOption,
+    MatSelectionList
   ]
 })
 export class MaterialLibModule { }
