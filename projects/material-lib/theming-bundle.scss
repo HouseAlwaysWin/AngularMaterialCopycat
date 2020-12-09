@@ -1,0 +1,7 @@
+// File for which all imports are resolved and bundled. This is the entry-point for
+// the `@angular/material` theming Sass bundle. See `//src/material:theming_bundle`.
+
+@import "./src/lib/core/color/all-color";
+@import "./src/lib/core/density/private/all-density";
+@import "./src/lib/core/theming/all-theme";
+@import "./src/lib/core/typography/all-typography";

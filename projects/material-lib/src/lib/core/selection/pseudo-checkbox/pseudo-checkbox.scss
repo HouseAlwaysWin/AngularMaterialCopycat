@@ -1,82 +1,68 @@
-@import '../../theming/theming';
+@import '../../style/checkbox-common';
+@import '../../style/private';
 
-@mixin mat-pseudo-checkbox-color($config-or-theme) {
-  $config: mat-get-color-config($config-or-theme);
-  $is-dark-theme: map-get($config, is-dark);
-  $primary: map-get($config, primary);
-  $accent: map-get($config, accent);
-  $warn: map-get($config, warn);
-  $background: map-get($config, background);
+// Padding inside of a pseudo checkbox.
+$_mat-pseudo-checkbox-padding: $mat-checkbox-border-width * 2;
 
-  // NOTE(traviskaufman): While the spec calls for translucent blacks/whites for disabled colors,
-  // this does not work well with elements layered on top of one another. To get around this we
-  // blend the colors together based on the base color and the theme background.
-  $white-30pct-opacity-on-dark: #686868;
-  $black-26pct-opacity-on-light: #b0b0b0;
-  $disabled-color: if($is-dark-theme, $white-30pct-opacity-on-dark, $black-26pct-opacity-on-light);
-  $colored-box-selector: '.mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate';
+// Size of the checkmark in a pseudo checkbox.
+$_mat-pseudo-checkmark-size: $mat-checkbox-size - (2 * $_mat-pseudo-checkbox-padding);
 
-  .mat-pseudo-checkbox {
-    color: mat-color(map-get($config, foreground), secondary-text);
 
+.mat-pseudo-checkbox {
+  width: $mat-checkbox-size;
+  height: $mat-checkbox-size;
+  border: $mat-checkbox-border-width solid;
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+  position: relative;
+  flex-shrink: 0;
+  transition:
+      border-color $mat-checkbox-transition-duration $mat-linear-out-slow-in-timing-function,
+      background-color $mat-checkbox-transition-duration $mat-linear-out-slow-in-timing-function;
+
+  // Used to render the checkmark/mixedmark inside of the box.
+  &::after {
+    position: absolute;
+    opacity: 0;
+    content: '';
+    border-bottom: $mat-checkbox-border-width solid currentColor;
+    transition: opacity $mat-checkbox-transition-duration $mat-linear-out-slow-in-timing-function;
+  }
+
+  &.mat-pseudo-checkbox-checked, &.mat-pseudo-checkbox-indeterminate {
+    border-color: transparent;
+  }
+
+  @include mat-private-animation-noop {
     &::after {
-      color: mat-color($background, background);
-    }
-  }
-
-  .mat-pseudo-checkbox-disabled {
-    color: $disabled-color;
-  }
-
-  .mat-primary .mat-pseudo-checkbox-checked,
-  .mat-primary .mat-pseudo-checkbox-indeterminate {
-    background: mat-color(map-get($config, primary));
-  }
-
-  // Default to the accent color. Note that the pseudo checkboxes are meant to inherit the
-  // theme from their parent, rather than implementing their own theming, which is why we
-  // don't attach to the `mat-*` classes. Also note that this needs to be below `.mat-primary`
-  // in order to allow for the color to be overwritten if the checkbox is inside a parent that
-  // has `mat-accent` and is placed inside another parent that has `mat-primary`.
-  .mat-pseudo-checkbox-checked,
-  .mat-pseudo-checkbox-indeterminate,
-  .mat-accent .mat-pseudo-checkbox-checked,
-  .mat-accent .mat-pseudo-checkbox-indeterminate {
-    background: mat-color(map-get($config, accent));
-  }
-
-  .mat-warn .mat-pseudo-checkbox-checked,
-  .mat-warn .mat-pseudo-checkbox-indeterminate {
-    background: mat-color(map-get($config, warn));
-  }
-
-  .mat-pseudo-checkbox-checked,
-  .mat-pseudo-checkbox-indeterminate {
-    &.mat-pseudo-checkbox-disabled {
-      background: $disabled-color;
+      transition: none;
     }
   }
 }
 
-@mixin mat-pseudo-checkbox-typography($config-or-theme) {}
+.mat-pseudo-checkbox-disabled {
+  cursor: default;
+}
 
-@mixin _mat-pseudo-checkbox-density($config-or-theme) {}
+.mat-pseudo-checkbox-indeterminate::after {
+  top: ($mat-checkbox-size - $mat-checkbox-border-width) / 2 - $mat-checkbox-border-width;
+  left: $mat-checkbox-border-width / 2;
+  width: $mat-checkbox-size - 6px;
+  opacity: 1;
+  border-radius: 2px;
+}
 
-@mixin mat-pseudo-checkbox-theme($theme-or-color-config) {
-  $theme: mat-private-legacy-get-theme($theme-or-color-config);
-  @include mat-private-check-duplicate-theme-styles($theme, 'mat-pseudo-checkbox') {
-    $color: mat-get-color-config($theme);
-    $density: mat-get-density-config($theme);
-    $typography: mat-get-typography-config($theme);
-
-    @if $color != null {
-      @include mat-pseudo-checkbox-color($color);
-    }
-    @if $density != null {
-      @include _mat-pseudo-checkbox-density($density);
-    }
-    @if $typography != null {
-      @include mat-pseudo-checkbox-typography($typography);
-    }
-  }
+.mat-pseudo-checkbox-checked::after {
+  top: ($mat-checkbox-size / 2) - ($_mat-pseudo-checkmark-size / 4) -
+      ($mat-checkbox-size / 10) - $mat-checkbox-border-width;
+  left: $_mat-pseudo-checkbox-padding - $mat-checkbox-border-width * 1.5;
+  width: $_mat-pseudo-checkmark-size;
+  height: ($_mat-pseudo-checkmark-size - $mat-checkbox-border-width) / 2;
+  border-left: $mat-checkbox-border-width solid currentColor;
+  transform: rotate(-45deg);
+  opacity: 1;
+  box-sizing: content-box;
 }
